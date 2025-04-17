@@ -285,7 +285,7 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     
     pub fn scroll_container_data(&self, id: Id) -> Option<Clay_ScrollContainerData> {
         unsafe {
-            Clay_SetCurrentContext(self.context);
+            Clay_SetCurrentContext(self.clay.context);
             let scroll_container_data = Clay_GetScrollContainerData(id.id);
 
             if scroll_container_data.found {
