@@ -282,6 +282,19 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     pub fn pointer_over(&self, cfg: Id) -> bool {
         unsafe { Clay_PointerOver(cfg.id) }
     }
+    
+    pub fn scroll_container_data(&self, id: Id) -> Option<Clay_ScrollContainerData> {
+        unsafe {
+            Clay_SetCurrentContext(self.context);
+            let scroll_container_data = Clay_GetScrollContainerData(id.id);
+
+            if scroll_container_data.found {
+                Some(scroll_container_data)
+            } else {
+                None
+            }
+        }
+    }
 }
 
 impl<ImageElementData, CustomElementData> Drop
@@ -472,18 +485,6 @@ impl Clay {
         }
     }
 
-    pub fn scroll_container_data(&self, id: Id) -> Option<Clay_ScrollContainerData> {
-        unsafe {
-            Clay_SetCurrentContext(self.context);
-            let scroll_container_data = Clay_GetScrollContainerData(id.id);
-
-            if scroll_container_data.found {
-                Some(scroll_container_data)
-            } else {
-                None
-            }
-        }
-    }
 
     /// Returns if the current element you are creating is hovered
     pub fn hovered(&self) -> bool {
