@@ -284,16 +284,10 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     }
     
     pub fn scroll_container_data(&self, id: Id) -> Option<Clay_ScrollContainerData> {
-        unsafe {
-            Clay_SetCurrentContext(self.clay.context);
-            let scroll_container_data = Clay_GetScrollContainerData(id.id);
-
-            if scroll_container_data.found {
-                Some(scroll_container_data)
-            } else {
-                None
-            }
-        }
+        self.clay.scroll_container_data(id)
+    }
+    pub fn bounding_box(&self, id: Id) -> Option<BoundingBox> {
+        self.clay.bounding_box(id)
     }
 }
 
