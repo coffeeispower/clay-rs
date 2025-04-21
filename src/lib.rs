@@ -282,7 +282,7 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     pub fn pointer_over(&self, cfg: Id) -> bool {
         unsafe { Clay_PointerOver(cfg.id) }
     }
-    
+
     pub fn scroll_container_data(&self, id: Id) -> Option<Clay_ScrollContainerData> {
         self.clay.scroll_container_data(id)
     }
@@ -478,7 +478,6 @@ impl Clay {
             Clay_UpdateScrollContainers(drag_scrolling_enabled, scroll_delta.into(), delta_time);
         }
     }
-
 
     /// Returns if the current element you are creating is hovered
     pub fn hovered(&self) -> bool {
