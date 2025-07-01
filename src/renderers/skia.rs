@@ -1,7 +1,7 @@
-use clay_layout::math::{BoundingBox, Dimensions};
-use clay_layout::render_commands::{Custom, RenderCommand, RenderCommandConfig};
-use clay_layout::text::TextConfig;
-use clay_layout::{ClayLayoutScope, Color as ClayColor};
+use crate::math::{BoundingBox, Dimensions};
+use crate::render_commands::{Custom, RenderCommand, RenderCommandConfig};
+use crate::text::TextConfig;
+use crate::{ClayLayoutScope, Color as ClayColor};
 use skia_safe::{
     Canvas, ClipOp, Color, Font, Image, Paint, Point, RRect, Rect, SamplingOptions, Typeface,
 };
