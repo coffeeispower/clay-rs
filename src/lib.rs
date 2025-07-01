@@ -47,10 +47,18 @@ impl<'render, ImageElementData: 'render, CustomElementData: 'render>
         self
     }
 
+    /// Sets aspect ratio for image elements.
     #[inline]
-    pub fn scroll(&mut self, horizontal: bool, vertical: bool) -> &mut Self {
-        self.inner.scroll.horizontal = horizontal;
-        self.inner.scroll.vertical = vertical;
+    pub fn aspect_ratio(&mut self, aspect_ratio: f32) -> &mut Self {
+        self.inner.aspectRatio.aspectRatio = aspect_ratio;
+        self
+    }
+
+    #[inline]
+    pub fn clip(&mut self, horizontal: bool, vertical: bool, child_offset: Vector2) -> &mut Self {
+        self.inner.clip.horizontal = horizontal;
+        self.inner.clip.vertical = vertical;
+        self.inner.clip.childOffset = child_offset.into();
         self
     }
 
@@ -288,6 +296,10 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     }
     pub fn bounding_box(&self, id: Id) -> Option<BoundingBox> {
         self.clay.bounding_box(id)
+    }
+
+    pub fn scroll_offset(&self) -> Vector2 {
+        unsafe { Clay_GetScrollOffset().into() }
     }
 }
 
@@ -531,6 +543,8 @@ impl Drop for Clay {
 impl From<&str> for Clay_String {
     fn from(value: &str) -> Self {
         Self {
+            // TODO: Can we support &'static str here?
+            isStaticallyAllocated: false,
             length: value.len() as _,
             chars: value.as_ptr() as _,
         }
