@@ -261,7 +261,7 @@ impl<'render, 'clay: 'render, ImageElementData: 'render, CustomElementData: 'ren
     }
 }
 
-impl<'clay, 'render, ImageElementData, CustomElementData> std::ops::Deref
+impl<'clay, 'render, ImageElementData, CustomElementData> core::ops::Deref
     for ClayLayoutScope<'clay, 'render, ImageElementData, CustomElementData>
 {
     type Target = Clay;
@@ -271,7 +271,7 @@ impl<'clay, 'render, ImageElementData, CustomElementData> std::ops::Deref
     }
 }
 
-impl<'clay, 'render, ImageElementData, CustomElementData> std::ops::DerefMut
+impl<'clay, 'render, ImageElementData, CustomElementData> core::ops::DerefMut
     for ClayLayoutScope<'clay, 'render, ImageElementData, CustomElementData>
 {
     fn deref_mut(&mut self) -> &mut Self::Target {
