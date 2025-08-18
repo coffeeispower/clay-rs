@@ -304,7 +304,7 @@ impl Clay {
 
     #[cfg(feature = "std")]
     pub fn new(dimensions: Dimensions) -> Self {
-        let memory_size = Self::required_memory_size();
+        let memory_size = Self::required_memory_size()*40;
         let memory = vec![0; memory_size];
         let context;
 
