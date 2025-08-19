@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 
 // SIMD includes on supported platforms
 #if !defined(CLAY_DISABLE_SIMD) && (defined(__x86_64__) || defined(_M_X64) || defined(_M_AMD64))
@@ -4260,8 +4261,10 @@ bool Clay_PointerOver(Clay_ElementId elementId) { // TODO return priority for se
 CLAY_WASM_EXPORT("Clay_GetScrollContainerData")
 Clay_ScrollContainerData Clay_GetScrollContainerData(Clay_ElementId id) {
     Clay_Context* context = Clay_GetCurrentContext();
+	printf("clay context = %p\n", context);
     for (int32_t i = 0; i < context->scrollContainerDatas.length; ++i) {
         Clay__ScrollContainerDataInternal *scrollContainerData = Clay__ScrollContainerDataInternalArray_Get(&context->scrollContainerDatas, i);
+		printf("clay scrollContainerData = %p\n", scrollContainerData);
         if (scrollContainerData->elementId == id.id) {
             Clay_ClipElementConfig *clipElementConfig = Clay__FindElementConfigWithType(scrollContainerData->layoutElement, CLAY__ELEMENT_CONFIG_TYPE_CLIP).clipElementConfig;
             if (!clipElementConfig) { // This can happen on the first frame before a scroll container is declared
